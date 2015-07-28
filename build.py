@@ -3,9 +3,25 @@ from config import config
 import logging
 import os
 import boto.route53
+import argparse
 
 
 # #
+
+#Arguments
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("-n","--name",
+                    help="name of instance")
+parser.add_argument("-s", "--size", choices=['micro',''],
+                    help="size of ec2 instance")
+parser.add_argument("-r", "--repo",
+                    help="docker repo to be installed")
+args = parser.parse_args()
+name = args.name
+size = args.size
+repo = args.repo
+
 # Logging
 logLocation = config.getConfig('logLocation')
 logger = logging.getLogger('AWS-DNS-Simple')
@@ -43,3 +59,4 @@ except boto.route53.exception.DNSServerError:
     zone.update_cname(c, fullAAlias, config.getConfig('ttl'))
 
 # Need to add functionality for other names
+
