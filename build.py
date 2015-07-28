@@ -9,7 +9,6 @@ import argparse
 # #
 
 #Arguments
-import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-n","--name",
                     help="name of instance")
@@ -24,7 +23,7 @@ repo = args.repo
 
 # Logging
 logLocation = config.getConfig('logLocation')
-logger = logging.getLogger('AWS-DNS-Simple')
+logger = logging.getLogger('docker-aws-python')
 hdlr = logging.FileHandler(logLocation)
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 hdlr.setFormatter(formatter)
@@ -59,4 +58,5 @@ except boto.route53.exception.DNSServerError:
     zone.update_cname(c, fullAAlias, config.getConfig('ttl'))
 
 # Need to add functionality for other names
+
 
