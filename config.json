@@ -1,0 +1,15 @@
+{
+ "aName": "cabbage",
+ "environment": "dev",
+ "purpose": "app",
+ "number": "01",
+ "domain": "example.com",
+ "cScheme": "purposenumber.environment.domain",
+ "logLocation" : "/var/log/docker-aws-python.log",
+ "otherNames": [
+    "banjo"
+ ],
+ "awsKey": "MY_KEY",
+ "awsSecret": "MY_SECRET",
+ "ttl": "180"
+}

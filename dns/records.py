@@ -1,8 +1,9 @@
 from config import config
-import urllib2
+import urllib.request
+
 '''
 Created on Apr 17, 2015
-@author: BrickRoad
+@author: Grillz
 '''
 
 def getAAlias():
@@ -17,5 +18,6 @@ def getCAlias():
     return c
 
 def getPublicIp():
-    ip = urllib2.urlopen('http://ip.42.pl/raw').read()
-    return ip
+    with urllib.request.urlopen('http://ip.42.pl/raw') as response:
+        ip = response.read()
+        return ip
