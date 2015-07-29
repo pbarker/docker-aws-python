@@ -42,6 +42,12 @@ parser.add_argument("-d", "--drivesize", type=int,
                     help="Drive Size in GB of main /dev/xvda volume")
 
 args = parser.parse_args()
+
+##
+#
+# We should probably have an "Options" CLASS that we can populate based on args passed
+# Then we can just define the default values in the CLASS
+#
 name = args.name
 size = args.size
 instance = args.instance
@@ -49,6 +55,63 @@ region = args.region
 security =  args.securitygroup
 os = args.os
 drivesize = args.drivesize
+
+
+
+
+
+
+
+
+##
+# Here is where we would come back to procedural land
+# And run code according to the options passed. We could then pass the pointer to the instantiated options class around
+# And get the options wherever we are in the code :)
+# Also we are going to need serious error handling, because a lot could go wrong
+
+
+
+
+
+
+
+##
+# Connect to Aws
+
+##
+# Spin up server (if it doesn't already exist!)
+
+##
+# Verify connectivity (while() loop)
+
+##
+# Update DNS (if configured)
+
+##
+# Update server
+
+##
+# Install docker
+
+##
+# Check out docker repository
+
+##
+# Start docker
+
+##
+# Win!
+
+
+
+
+
+
+
+
+
+
+
 
 # Logging
 logLocation = config.getConfig('logLocation')
@@ -74,24 +137,4 @@ logger.setLevel(logging.DEBUG)
 os.environ['AWS_ACCESS_KEY_ID'] = config.getConfig('awsKey')
 os.environ['AWS_SECRET_ACCESS_KEY'] = config.getConfig('awsSecret')
 
-
-
-conn = boto.route53.connect_to_region('us-west-2')
-zone = conn.get_zone(config.getConfig('domain'));
-# A
-'''
-fullAAlias = a + '.' + config.getConfig('domain')
-try:
-    zone.add_a(fullAAlias, ip, config.getConfig('ttl'))
-except boto.route53.exception.DNSServerError:
-    zone.update_a(fullAAlias, ip, config.getConfig('ttl'))
-
-# C
-try:
-    zone.add_cname(c, fullAAlias, config.getConfig('ttl'))
-except boto.route53.exception.DNSServerError:
-    zone.update_cname(c, fullAAlias, config.getConfig('ttl'))
-
-# Need to add functionality for other names
-'''
 
