@@ -30,12 +30,25 @@ parser.add_argument("-n","--name",
                     help="name of instance")
 parser.add_argument("-s", "--size", choices=['micro',''],
                     help="size of ec2 instance")
-parser.add_argument("-r", "--repo",
-                    help="docker repo to be installed")
+parser.add_argument("-i", "--instance",
+                    help="docker image to be installed")
+parser.add_argument("-r", "--region",
+                    help="region of server location")
+parser.add_argument("-g", "--securitygroup",
+                    help="Security group ID")
+parser.add_argument("-o", "--os",
+                    help="Server Operating System")
+parser.add_argument("-d", "--drivesize", type=int,
+                    help="Drive Size in GB of main /dev/xvda volume")
+
 args = parser.parse_args()
 name = args.name
 size = args.size
-repo = args.repo
+instance = args.instance
+region = args.region
+security =  args.securitygroup
+os = args.os
+drivesize = args.drivesize
 
 # Logging
 logLocation = config.getConfig('logLocation')
@@ -66,6 +79,7 @@ os.environ['AWS_SECRET_ACCESS_KEY'] = config.getConfig('awsSecret')
 conn = boto.route53.connect_to_region('us-west-2')
 zone = conn.get_zone(config.getConfig('domain'));
 # A
+'''
 fullAAlias = a + '.' + config.getConfig('domain')
 try:
     zone.add_a(fullAAlias, ip, config.getConfig('ttl'))
@@ -79,5 +93,5 @@ except boto.route53.exception.DNSServerError:
     zone.update_cname(c, fullAAlias, config.getConfig('ttl'))
 
 # Need to add functionality for other names
-
+'''
 
